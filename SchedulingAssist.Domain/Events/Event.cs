@@ -2,6 +2,7 @@
 
 public class Event
 {
+    public long Id { get; private set; } = 0;
     public string Title { get; private set; }
 
     public string Description { get; private set; }
@@ -10,6 +11,24 @@ public class Event
 
     public DateTimeOffset EndTime { get; private set; }
     public long CreatedByUserId { get; set; }
+
+    public Event()
+    {
+    }
+
+    public static Event Rehydrate(long id, string title, string description, DateTimeOffset startTime,
+        DateTimeOffset endTime, long createdByUserId)
+    {
+        return new Event
+        {
+            Id = id,
+            Title = title,
+            Description = description,
+            StartTime = startTime,
+            EndTime = endTime,
+            CreatedByUserId = createdByUserId
+        };
+    }
 
     private Event(
         string title,
@@ -60,5 +79,23 @@ public class Event
             startTime,
             endTime,
             userId);
+    }
+
+    public void Update(string title, string description, DateTime startTime, DateTime endTime)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+            throw new ArgumentException(
+                "Title is required.",
+                nameof(title));
+
+        if (startTime >= endTime)
+            throw new ArgumentException(
+                "Start time must be before end time.",
+                nameof(startTime));
+
+        Title = title;
+        Description = description;
+        StartTime = startTime;
+        EndTime = endTime;
     }
 }

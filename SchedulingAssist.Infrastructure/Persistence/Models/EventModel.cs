@@ -1,4 +1,6 @@
-﻿namespace SchedulingAssist.Infrastructure.Persistence.Models;
+﻿using SchedulingAssist.Domain.Events;
+
+namespace SchedulingAssist.Infrastructure.Persistence.Models;
 
 public class EventModel
 {
@@ -10,4 +12,5 @@ public class EventModel
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
     public long CreatedByUserId { get; set; }
+
 }

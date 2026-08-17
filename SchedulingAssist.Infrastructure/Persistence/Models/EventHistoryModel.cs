@@ -8,7 +8,6 @@ public class EventHistoryModel
     public string Description { get; set; } = null!;
     public DateTimeOffset StartTime { get; set; }
     public DateTimeOffset EndTime { get; set; }
-    public string Status { get; set; } = null!;
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
     public long CreateByUserId { get; set; }

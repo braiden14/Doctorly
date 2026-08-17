@@ -1,4 +1,5 @@
 ﻿using SchedulingAssist.Application.Events;
+using SchedulingAssist.Application.RequestModels;
 
 namespace SchedulingAssist.Endpoints;
 
@@ -12,6 +13,8 @@ public static class EventEndpoints
             .Produces<long>(StatusCodes.Status201Created)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError);
+        
+        endpoints.MapPut("/{id:long}", UpdateEvent);
         ;
     }
 
@@ -30,6 +33,22 @@ public static class EventEndpoints
 
         return Results.Created($"/api/events/{eventId}", new { id = eventId });
     }
+    
+    private static async Task<IResult> UpdateEvent(
+        long id,
+        UpdateEventRequest request,
+        IEventService eventService,
+        CancellationToken cancellationToken)
+    {
+        long userId = 1;
+        
+        await eventService.UpdateAsync(
+            id,
+            request,
+            userId,
+            cancellationToken);
+
+        return Results.NoContent();
+    }
 }
 
-public record CreateEventRequest(string Title, string Description, DateTimeOffset StartTime, DateTimeOffset EndTime);

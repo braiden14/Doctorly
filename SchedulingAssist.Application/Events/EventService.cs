@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SchedulingAssist.Application.Common.Interfaces;
+using SchedulingAssist.Application.RequestModels;
 using SchedulingAssist.Domain.Events;
 
 namespace SchedulingAssist.Application.Events;
@@ -20,5 +21,23 @@ public class EventService(IEventRepository eventRepository, ILogger<EventService
         logger.LogInformation("Event {EventId} created successfully", eventId);
 
         return eventId;
+    }
+    
+    public async Task UpdateAsync(long eventId, UpdateEventRequest request, long userId, CancellationToken cancellationToken = default)
+    {
+        var @event = await eventRepository.GetByIdAsync(eventId, cancellationToken);
+        
+        if (@event is null)
+        {
+            throw new KeyNotFoundException(
+                $"Event with ID {eventId} was not found.");
+        }
+
+        @event.Update(request.Title, request.Description, request.StartTime, request.EndTime);
+
+        await eventRepository.UpdateAsync(
+            @event,
+            userId,
+            cancellationToken);
     }
 }
