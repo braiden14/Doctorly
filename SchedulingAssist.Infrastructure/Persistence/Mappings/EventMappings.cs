@@ -13,7 +13,9 @@ public static class EventMappings
             model.Description,
             model.StartTime,
             model.EndTime,
-            model.CreatedByUserId);
+            model.CreatedByUserId,
+            model.IsCancelled,
+            model.IsDeleted);
     }
 
     public static EventModel ToModel(this Event @event)
@@ -25,7 +27,9 @@ public static class EventMappings
             Description = @event.Description,
             StartTime = @event.StartTime,
             EndTime = @event.EndTime,
-            CreatedByUserId = @event.CreatedByUserId
+            CreatedByUserId = @event.CreatedByUserId,
+            IsCancelled = @event.IsCancelled,
+            IsDeleted = @event.IsDeleted,
         };
     }
 }

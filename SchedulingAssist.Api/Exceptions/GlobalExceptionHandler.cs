@@ -24,6 +24,22 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
             return true;
         }
 
+        if (exception is KeyNotFoundException)
+        {
+            httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+            await httpContext.Response.WriteAsJsonAsync(
+                new ProblemDetails
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                    Title = "Not found",
+                    Detail = exception.Message
+                },
+                cancellationToken);
+
+            return true;
+        }
+
         logger.LogError(exception, "Unhandled exception occurred while processing {RequestMethod} {RequestPath}",
             httpContext.Request.Method, httpContext.Request.Path);
 

@@ -9,4 +9,8 @@ public interface IEventService
 
     Task UpdateAsync(long eventId, UpdateEventRequest request, long userId,
         CancellationToken cancellationToken = default);
+
+    Task CancelAsync(long eventId, long userId, CancellationToken cancellationToken = default);
+
+    Task DeleteAsync(long eventId, long userId, CancellationToken cancellationToken = default);
 }

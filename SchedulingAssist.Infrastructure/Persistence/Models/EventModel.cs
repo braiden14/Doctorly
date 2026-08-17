@@ -12,5 +12,6 @@ public class EventModel
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
     public long CreatedByUserId { get; set; }
-
+    public bool IsDeleted { get; set; }
+    public bool IsCancelled  { get; set; }
 }

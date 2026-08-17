@@ -1,0 +1,19 @@
+﻿CREATE TABLE EventHistory
+(
+    Id BIGINT IDENTITY(1,1) NOT NULL,
+    EventId BIGINT NOT NULL,
+    Title NVARCHAR(200) NOT NULL,
+    Description NVARCHAR(2000) NOT NULL,
+    StartTime DATETIMEOFFSET NOT NULL,
+    EndTime DATETIMEOFFSET NOT NULL,
+    CreatedAt DATETIMEOFFSET NOT NULL,
+    UpdatedAt DATETIMEOFFSET NOT NULL,
+    CreateByUserId BIGINT NOT NULL,
+
+    CONSTRAINT PK_EventHistory
+        PRIMARY KEY (Id),
+
+    CONSTRAINT FK_EventHistory_Events
+        FOREIGN KEY (EventId)
+            REFERENCES Events(Id)
+);

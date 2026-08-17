@@ -32,6 +32,9 @@ public class EventService(IEventRepository eventRepository, ILogger<EventService
             throw new KeyNotFoundException(
                 $"Event with ID {eventId} was not found.");
         }
+        
+        logger.LogInformation("Creating event with title {EventTitle} from {StartTime} to {EndTime}", @event.Title,
+            @event.StartTime, @event.EndTime);
 
         @event.Update(request.Title, request.Description, request.StartTime, request.EndTime);
 
@@ -39,5 +42,45 @@ public class EventService(IEventRepository eventRepository, ILogger<EventService
             @event,
             userId,
             cancellationToken);
+        
+        logger.LogInformation("Event {EventId} updated successfully", eventId);
+    }
+
+    public async Task CancelAsync(long eventId, long userId, CancellationToken cancellationToken = default)
+    {
+        var @event = await eventRepository.GetByIdAsync(eventId, cancellationToken);
+        
+        if (@event is null)
+        {
+            throw new KeyNotFoundException($"Event with ID {eventId} was not found.");
+        }
+        
+        logger.LogInformation("Cancelling event with title {EventTitle} from {StartTime} to {EndTime}", @event.Title,
+            @event.StartTime, @event.EndTime);
+        
+        @event.Cancel();
+
+        await eventRepository.UpdateAsync(@event, userId, cancellationToken);
+        
+        logger.LogInformation("Event {EventId} cancelled successfully", eventId);
+    }
+
+    public async Task DeleteAsync(long eventId, long userId, CancellationToken cancellationToken = default)
+    {
+        var @event = await eventRepository.GetByIdAsync(eventId, cancellationToken);
+        
+        if (@event is null)
+        {
+            throw new KeyNotFoundException($"Event with ID {eventId} was not found.");
+        }
+        
+        logger.LogInformation("Deleting event with title {EventTitle} from {StartTime} to {EndTime}", @event.Title,
+            @event.StartTime, @event.EndTime);
+        
+        @event.Delete();
+
+        await eventRepository.UpdateAsync(@event, userId, cancellationToken);
+        
+        logger.LogInformation("Event {EventId} deleted successfully", eventId);
     }
 }
