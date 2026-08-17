@@ -1,0 +1,18 @@
+﻿{
+  "runtime": "Net100",
+  "documentGenerator": {
+    "fromDocument": {
+      "url": "$(OpenApiSpecPath)"
+    }
+  },
+  "codeGenerators": {
+    "openApiToCSharpClient": {
+      "className": "SchedulingAssistClient",
+      "namespace": "SchedulingAssist.Client",
+      "output": "../SchedulingAssist.Client/SchedulingAssistClient.cs",
+      "jsonLibrary": "SystemTextJson",
+      "inlineNamedArrays": true,
+      "inlineNamedDictionaries": true
+    }
+  }
+}

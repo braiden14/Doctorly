@@ -176,6 +176,27 @@ This approach provides a consistent error-handling strategy while avoiding unnec
 
 ---
 
+## API Client Generation
+
+**NSwag.MSBuild** is used to generate the API client from the application's OpenAPI specification.
+
+NSwag is an established tool in the .NET ecosystem for OpenAPI/Swagger generation and client code generation. It supports generating strongly typed C# clients directly from an OpenAPI specification, which helps avoid manually maintaining HTTP client code and DTOs.
+
+The MSBuild integration was chosen so that client generation can be incorporated into the build process rather than requiring developers to manually run a separate code-generation command. The `NSwag.MSBuild` package exposes the NSwag tooling to MSBuild targets and supports executing an `nswag.json` configuration as part of the build.
+
+This provides a few practical benefits:
+
+* Strongly typed API clients
+* Reduced manually written HTTP client code
+* Generated clients remain aligned with the OpenAPI contract
+* Repeatable client generation
+* Easier integration into CI/CD pipelines
+* Reduced risk of the client implementation drifting from the API contract
+
+For this solution, the decision was primarily driven by maintainability and consistency rather than introducing custom client-generation logic.
+
+---
+
 ## Dependency Injection
 
 Dependency Injection registration has been intentionally separated according to architectural responsibility.

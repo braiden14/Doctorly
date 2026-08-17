@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedulingAssist.Applicatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedulingAssist.Infrastructure", "SchedulingAssist.Infrastructure\SchedulingAssist.Infrastructure.csproj", "{0A391DBD-1D74-4B2A-8E14-227B45C810B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedulingAssist.Client", "SchedulingAssist.Client\SchedulingAssist.Client.csproj", "{35F16FDD-4ED3-4ED2-9DC8-6970541507D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{0A391DBD-1D74-4B2A-8E14-227B45C810B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A391DBD-1D74-4B2A-8E14-227B45C810B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A391DBD-1D74-4B2A-8E14-227B45C810B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35F16FDD-4ED3-4ED2-9DC8-6970541507D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F16FDD-4ED3-4ED2-9DC8-6970541507D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35F16FDD-4ED3-4ED2-9DC8-6970541507D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35F16FDD-4ED3-4ED2-9DC8-6970541507D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
