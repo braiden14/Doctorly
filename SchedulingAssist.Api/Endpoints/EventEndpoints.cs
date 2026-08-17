@@ -4,17 +4,22 @@ namespace SchedulingAssist.Endpoints;
 
 public static class EventEndpoints
 {
-    public static IEndpointRouteBuilder MapEventEndpoints(this IEndpointRouteBuilder endpoints)
+    public static void MapEventEndpoints(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/api/events", CreateEvent);
-
-        return endpoints;
+        endpoints.MapPost("/api/events", CreateEvent).WithName("CreateEvent")
+            .WithSummary("Create an event")
+            .WithDescription("Creates a new event in the doctor's schedule.")
+            .Produces<long>(StatusCodes.Status201Created)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status500InternalServerError);
+        ;
     }
 
-    private static async Task<IResult> CreateEvent(CreateEventRequest request, IEventService eventService, CancellationToken cancellationToken)
+    private static async Task<IResult> CreateEvent(CreateEventRequest request, IEventService eventService,
+        CancellationToken cancellationToken)
     {
         long userId = 1;
-        
+
         var eventId = await eventService.CreateEvent(
             request.Title,
             request.Description,
@@ -27,7 +32,4 @@ public static class EventEndpoints
     }
 }
 
-public record CreateEventRequest(string Title,
-    string Description,
-    DateTimeOffset StartTime,
-    DateTimeOffset EndTime);
+public record CreateEventRequest(string Title, string Description, DateTimeOffset StartTime, DateTimeOffset EndTime);

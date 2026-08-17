@@ -6,12 +6,10 @@ namespace SchedulingAssist.Config;
 
 public static class ApplicationConfig
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static void AddApplication(this IServiceCollection services)
     {
         services.AddSingleton<IEventService, EventService>();
         
         services.AddScoped<IEventRepository, EventRepository>();
-
-        return services;
     }
 }
