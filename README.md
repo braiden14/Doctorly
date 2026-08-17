@@ -184,6 +184,8 @@ NSwag is an established tool in the .NET ecosystem for OpenAPI/Swagger generatio
 
 The MSBuild integration was chosen so that client generation can be incorporated into the build process rather than requiring developers to manually run a separate code-generation command. The `NSwag.MSBuild` package exposes the NSwag tooling to MSBuild targets and supports executing an `nswag.json` configuration as part of the build.
 
+This configuration took a significant amount of time to get working correctly, primarily due to configuration issues while setting up the NSwag generation process. This is worth noting because the final setup is relatively simple from a consumer's perspective, but getting the configuration and build integration correct required additional troubleshooting and iteration.
+
 This provides a few practical benefits:
 
 * Strongly typed API clients
