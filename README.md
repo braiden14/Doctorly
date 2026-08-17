@@ -145,6 +145,37 @@ This approach also leaves room for the system to evolve towards a more comprehen
 
 ---
 
+## Structured Logging
+
+The solution uses **Serilog** for structured application logging.
+
+Serilog was chosen because it provides a more flexible and structured logging approach than relying solely on the default logging providers. In particular, it allows log events to be captured with named properties and contextual information rather than treating logs as simple text messages.
+
+This provides several benefits:
+
+* Structured and searchable log events
+* Consistent logging across the application
+* Support for enriching logs with contextual properties
+* Flexible output sinks, allowing logs to be directed to different destinations
+* Better support for production observability and troubleshooting
+* Easier integration with centralised logging platforms in a production environment
+
+For this assessment, the primary goal is to establish a consistent structured logging foundation that can be extended with additional sinks and enrichment as the solution evolves.
+
+---
+
+## Global Exception Handling
+
+The API uses a **global exception handler** to centralise exception handling rather than placing repetitive `try/catch` blocks throughout the application.
+
+The handler distinguishes between expected validation errors and unexpected application errors. `ArgumentException` is treated as an expected validation exception and is not logged as an application failure. These exceptions result in an HTTP **400 Bad Request** response.
+
+For unexpected or unhandled exceptions, the implementation logs the full exception details for troubleshooting while returning a generic error message to the client. This prevents internal implementation details or sensitive exception information from being exposed through the API.
+
+This approach provides a consistent error-handling strategy while avoiding unnecessary log noise from expected validation failures. It also keeps the endpoint and application code cleaner by separating exception handling from the core business logic.
+
+---
+
 ## Dependency Injection
 
 Dependency Injection registration has been intentionally separated according to architectural responsibility.
