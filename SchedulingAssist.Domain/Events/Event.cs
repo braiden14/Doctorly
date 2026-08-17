@@ -61,7 +61,7 @@ public class Event
         return new Event(title.Trim(), description.Trim(), startTime, endTime, userId);
     }
 
-    public void Update(string title, string description, DateTime startTime, DateTime endTime)
+    public void Update(string title, string description, DateTimeOffset startTime, DateTimeOffset endTime)
     {
         if (string.IsNullOrWhiteSpace(title))
             throw new ArgumentException("Title is required.", nameof(title));

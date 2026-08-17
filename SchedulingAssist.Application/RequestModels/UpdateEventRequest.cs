@@ -3,5 +3,5 @@
 public record UpdateEventRequest(
     string Title,
     string Description,
-    DateTime StartTime,
-    DateTime EndTime);
+    DateTimeOffset StartTime,
+    DateTimeOffset EndTime);
