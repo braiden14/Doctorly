@@ -1,0 +1,6 @@
+@SchedulingAssist_HostAddress = http://localhost:5031
+
+GET {{SchedulingAssist_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
